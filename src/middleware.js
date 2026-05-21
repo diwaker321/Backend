@@ -26,6 +26,18 @@ app.get("/user/:username" ,userauth , (req,res)=>{
     res.send(`hello ${req.params.username}`)
 })
 
+//how to handle the error in express
+
+app.get("/login" , (req,res)=>{
+    throw new Error("custom error ...")
+})
+app.use("/" , (err,req,res,next)=>{
+    if(err){
+        console.log('err: ', err);
+        res.status(500).send("Something went wrong")
+    }
+})
+
 app.listen("3000", () => {
   console.log("server is listening to port 3000");
 });
