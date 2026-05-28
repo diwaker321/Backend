@@ -66,14 +66,17 @@ const connectDB = require("../config/databse")
 
 const User = require("../model/user")
 
+app.use(express.json())
 app.post("/signup", async (req,res)=>{
-    const dummyobj = {
-        firstname:"diwaker",
-        lastname:"dwivedi",
-        email:"diwaker@gmail.com",
-        password:"12345678"
-    }
-    const user = new User(dummyobj)
+    console.log(req.body);
+    
+    // const dummyobj = {
+    //     firstname:"diwaker",
+    //     lastname:"dwivedi",
+    //     email:"diwaker@gmail.com",
+    //     password:"12345678"
+    // }
+    const user = new User(req.body)
     await user.save()
 
     res.send("Data has been saved")
